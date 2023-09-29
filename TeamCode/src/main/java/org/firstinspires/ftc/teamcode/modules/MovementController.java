@@ -4,8 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import java.text.Format;
-
 public final class MovementController {
     /**
      * The motor that drives the front right mecanum wheel
@@ -124,19 +122,5 @@ public final class MovementController {
         frontRightMecanumDriver.setPower(rightFrontPower);
         backRightMecanumDriver.setPower(rightBackPower);
         backLeftMecanumDriver.setPower(leftBackPower);
-    }
-
-    /**
-     * don't.
-     */
-    public void meltMotors() {
-        while (true) {
-            for (double power = -1.0; power <= 1.0; power += 0.00000000001) {
-                frontRightMecanumDriver.setPower(power);
-                frontLeftMecanumDriver.setPower(power);
-                backLeftMecanumDriver.setPower(power);
-                backRightMecanumDriver.setPower(power);
-            }
-        }
     }
 }

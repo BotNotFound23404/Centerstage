@@ -2,10 +2,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import org.firstinspires.ftc.teamcode.modules.MovementController;
 
 import java.util.List;
-import org.firstinspires.ftc.teamcode.modules.MovementController;
 
 public abstract class OpBase extends LinearOpMode {
 
@@ -23,9 +23,7 @@ public abstract class OpBase extends LinearOpMode {
     public void initHardware() throws InterruptedException {
         // Hubs
         List<LynxModule> allHubs = hardwareMap.getAll(LynxModule.class);
-        allHubs.forEach((hub) -> {
-            hub.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
-        });
+        allHubs.forEach((hub) -> hub.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO));
         telemetry.addLine("Lynx modules configured");
 
         // Motors
