@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.modules;
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -81,7 +83,7 @@ public final class MovementController {
      * @param registrar the OpMode that will be using the module
      * @exception InterruptedException The module was unable to locate the necessary motors
      */
-    public MovementController(OpMode registrar) throws InterruptedException {
+    public MovementController(@NonNull OpMode registrar) throws InterruptedException {
         this(
             registrar.hardwareMap.get(DcMotor.class, FRONT_RIGHT_MECANUM_DRIVER_DEFAULT_NAME),
             registrar.hardwareMap.get(DcMotor.class, FRONT_LEFT_MECANUM_DRIVER_DEFAULT_NAME),

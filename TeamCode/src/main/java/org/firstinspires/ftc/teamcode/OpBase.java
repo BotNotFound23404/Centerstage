@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.modules.Arm;
+import org.firstinspires.ftc.teamcode.modules.Grabber;
 import org.firstinspires.ftc.teamcode.modules.MovementController;
 
 import java.util.List;
@@ -13,6 +15,8 @@ public abstract class OpBase extends LinearOpMode {
 
     // Module Classes
     protected MovementController mover;
+    protected Arm arm;
+    protected Grabber grabber;
 
     // Global Variables
 
@@ -32,6 +36,8 @@ public abstract class OpBase extends LinearOpMode {
         
         // Init Module classes
         mover = new MovementController(this);
+        grabber = new Grabber(this);
+        arm = new Arm(this);
         telemetry.addLine("Module classes created");
 
         telemetry.addLine("Successfully initialized hardware!");

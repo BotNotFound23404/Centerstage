@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.OpBase;
 
 @TeleOp(name="Manual Control")
@@ -21,6 +19,10 @@ public class TeleOpMain extends OpBase {
                     -gamepad1.left_stick_y,
                     gamepad1.right_stick_x
             );
+
+            if (gamepad1.a) {
+                grabber.toggleGrabState();
+            }
         }
     }
     
