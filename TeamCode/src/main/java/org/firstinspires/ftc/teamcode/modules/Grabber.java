@@ -27,14 +27,14 @@ public final class Grabber {
     public static final String SERVO2_DEFAULT_NAME = "Grabber Servo 2";
 
     /**
-     * The position the motor should be in when the grabber is active
+     * The amount the servos should rotate when the grabber grabs
      */
-    private static final double ACTIVE_SERVO_POSITION = 0.5;
+    private static final double ACTIVE_SERVO_ROTATION_OFFSET = 0.5;
 
     /**
-     * The position the motor should be in when the grabber is inactive
+     * The amount the servos should rotate when the grabber releases
      */
-    private static final double INACTIVE_SERVO_POSITION = 0;
+    private static final double INACTIVE_SERVO_ROTATION_OFFSET = -0.5;
 
     private boolean isGrabbing;
 
@@ -89,8 +89,8 @@ public final class Grabber {
         isGrabbing = true;
 
         // rotating servos in different directions to rotate the middle gear
-        servo1.setPosition(ACTIVE_SERVO_POSITION);
-        servo2.setPosition(-ACTIVE_SERVO_POSITION);
+        servo1.setPosition(servo1.getPosition() + ACTIVE_SERVO_ROTATION_OFFSET);
+        servo2.setPosition(servo2.getPosition() - ACTIVE_SERVO_ROTATION_OFFSET);
     }
 
     /**
@@ -101,8 +101,8 @@ public final class Grabber {
         isGrabbing = false;
 
         // rotating servos in different directions to rotate the middle gear
-        servo1.setPosition(INACTIVE_SERVO_POSITION);
-        servo2.setPosition(-INACTIVE_SERVO_POSITION);
+        servo1.setPosition(servo1.getPosition()  + INACTIVE_SERVO_ROTATION_OFFSET);
+        servo2.setPosition(servo2.getPosition() - INACTIVE_SERVO_ROTATION_OFFSET);
     }
 
     /**
