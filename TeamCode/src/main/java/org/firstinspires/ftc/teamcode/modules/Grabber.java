@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public final class Grabber {
+
+    static final int ENCODER_RESOLUTION = ((((1+(46/17))) * (1+(46/17))) * (1+(46/17)) * 28);
+
     /**
      * The first servo controlling the grabber
      */
@@ -46,21 +49,32 @@ public final class Grabber {
         return isGrabbing;
     }
 
+    public Arm grabberArm;
+
     /**
-     * Initializes the module with the given motor
+     * Initializes the module with the given motors
      * @param servo1 The first servo controlling the grabber
      * @param servo2 The second servo controlling the grabber
      */
-    public Grabber(Servo servo1, Servo servo2) {
+    public Grabber(Servo servo1, Servo servo2) { this(servo1, servo2, null); }
+
+    /**
+     * Initializes the module with the given motors
+     * @param servo1 The first servo controlling the grabber
+     * @param servo2 The second servo controlling the grabber
+     * @param arm The arm module attached to the grabber
+     */
+    public Grabber(Servo servo1, Servo servo2, Arm arm) {
         this.servo1 = servo1;
         this.servo2 = servo2;
+        grabberArm = arm;
 
         isGrabbing = true; // release() only runs if isGrabbing isn't set to false
         release(); // in case the grabber is currently active, deactivate it
     }
 
     /**
-     * Given an OpMode, initializes the module with the default motor (one with the module's default motor name)
+     * Given an OpMode, initializes the module with the default motors (ones with the module's default motor name)
      * @param registrar The OpMode initializing the module
      * @exception InterruptedException The module was unable to locate the necessary motors
      */
@@ -88,6 +102,19 @@ public final class Grabber {
         if (isGrabbing()) { return; }
         isGrabbing = true;
 
+        if (grabberArm != null) {
+            grabberArm.setRotation(0);
+        }
+
+        while (grabberArm.isRotating()) {
+            try {
+                wait(1);
+            }
+            catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+
         // rotating servos in different directions to rotate the middle gear
         servo1.setPosition(servo1.getPosition() + ACTIVE_SERVO_ROTATION_OFFSET);
         servo2.setPosition(servo2.getPosition() - ACTIVE_SERVO_ROTATION_OFFSET);
@@ -99,6 +126,10 @@ public final class Grabber {
     public void release() {
         if (!isGrabbing()) { return; }
         isGrabbing = false;
+
+        if (grabberArm != null) {
+            grabberArm.setRotation(ENCODER_RESOLUTION / 4);
+        }
 
         // rotating servos in different directions to rotate the middle gear
         servo1.setPosition(servo1.getPosition()  + INACTIVE_SERVO_ROTATION_OFFSET);

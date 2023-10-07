@@ -9,25 +9,49 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public final class Arm {
 
     /**
-     * lmao its the arm motor
+     * The motor moving the arm
      */
     private final DcMotor armMotor;
 
     /**
-     * default name for the armMotor
+     * Default name for the armMotor
      */
     public static final String ARM_MOTOR_DEFAULT_NAME = "Arm Motor";
 
+    /**
+     * Initializes the module with the given motor
+     * @param armMotor the motor moving the arm
+     */
     public Arm(DcMotor armMotor) {
         this.armMotor = armMotor;
 
         // motor config
         armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
+    /**
+     * Given an OpMode, initializes the module with the default motor (one with the module's default motor name)
+     * @param registrar The OpMode initializing the module
+     * @exception InterruptedException The module was unable to locate the necessary motors
+     */
     public Arm(@NonNull OpMode registrar) throws InterruptedException {
         this(
                 registrar.hardwareMap.get(DcMotor.class, ARM_MOTOR_DEFAULT_NAME)
         );
+    }
+
+    public void setRotation(int rotation) {
+        armMotor.setTargetPosition(rotation);
+    }
+
+    public void rotate(int rotation) {
+        int curRotation = armMotor.getTargetPosition();
+        armMotor.setTargetPosition(curRotation + rotation);
+    }
+
+    public boolean isRotating() {
+        return armMotor.getCurrentPosition() == armMotor.getTargetPosition();
     }
 }
