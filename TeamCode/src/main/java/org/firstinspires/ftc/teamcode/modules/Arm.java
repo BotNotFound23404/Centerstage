@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public final class Arm {
 
+    public static final int ENCODER_RESOLUTION = ((((1+(46/17))) * (1+(46/17))) * (1+(46/17)) * 28);
+
     /**
      * The motor moving the arm
      */
@@ -47,8 +49,7 @@ public final class Arm {
     }
 
     public void rotate(int rotation) {
-        int curRotation = armMotor.getTargetPosition();
-        armMotor.setTargetPosition(curRotation + rotation);
+        armMotor.setPower(rotation);
     }
 
     public boolean isRotating() {

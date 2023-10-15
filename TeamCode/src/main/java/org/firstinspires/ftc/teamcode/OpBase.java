@@ -20,7 +20,6 @@ public abstract class OpBase extends LinearOpMode {
     protected Grabber grabber;
 
     // Global Variables
-    protected DcMotor armMotor;
 
     /**
      * Initializes global hardware and module classes
@@ -40,7 +39,6 @@ public abstract class OpBase extends LinearOpMode {
         mover = new MovementController(this);
         grabber = new Grabber(this);
         arm = new Arm(this);
-        grabber.grabberArm = arm;
         telemetry.addLine("Module classes created");
 
         telemetry.addLine("Successfully initialized hardware!");
