@@ -27,7 +27,7 @@ After that is done, make a new file at the root of the repostiory called `local.
 sdk.dir="Absolute path of the folder containing the Android SDK"
 </code>
 
-With that set up, just open a terminal in the root of the repository and enter the command `.\gradlew build` to build the project.
+With that set up, just open a terminal in the root of the repository and enter the command `.\gradlew build` to build the project, or `./gradlew installRelease` while connected to the Control Hub to install the build there.
 
 ## Help
 
