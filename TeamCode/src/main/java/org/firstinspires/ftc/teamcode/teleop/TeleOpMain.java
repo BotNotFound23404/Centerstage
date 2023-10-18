@@ -47,7 +47,7 @@ public class TeleOpMain extends OpBase {
             );
 
             // 2nd gamepad controls grabbing
-            grabber.rotate(gamepad2.left_stick_y);
+            grabber.rotate(gamepad2.left_stick_y * 0.005);
             arm.rotate((int)(gamepad2.right_stick_y * Arm.ENCODER_RESOLUTION));
             if (currentGamepad1.a && !previousGamepad1.a) {
                 grabber.toggleGrabState();

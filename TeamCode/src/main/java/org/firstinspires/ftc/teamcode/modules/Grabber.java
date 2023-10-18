@@ -46,7 +46,6 @@ public final class Grabber {
      * Initializes the module with the given motors
      * @param servo1 The first servo controlling the grabber
      * @param servo2 The second servo controlling the grabber
-     * @param arm The arm module attached to the grabber
      */
     public Grabber(Servo servo1, Servo servo2) {
         this.servo1 = servo1;
@@ -75,7 +74,7 @@ public final class Grabber {
     public void rotate(double rotation) {
         // rotate relative to current position to preserve grab state
         servo1.setPosition(servo1.getPosition() + rotation);
-        servo2.setPosition(servo2.getPosition() + rotation);
+        servo2.setPosition(servo2.getPosition() - rotation);
     }
 
     /**
@@ -87,7 +86,7 @@ public final class Grabber {
 
         // rotating servos in different directions to rotate the middle gear
         servo1.setPosition(servo1.getPosition() + ACTIVE_SERVO_ROTATION_OFFSET);
-        servo2.setPosition(servo2.getPosition() - ACTIVE_SERVO_ROTATION_OFFSET);
+        servo2.setPosition(servo2.getPosition() + ACTIVE_SERVO_ROTATION_OFFSET);
     }
 
     /**
@@ -99,7 +98,7 @@ public final class Grabber {
 
         // rotating servos in different directions to rotate the middle gear
         servo1.setPosition(servo1.getPosition()  - ACTIVE_SERVO_ROTATION_OFFSET);
-        servo2.setPosition(servo2.getPosition() + ACTIVE_SERVO_ROTATION_OFFSET);
+        servo2.setPosition(servo2.getPosition() - ACTIVE_SERVO_ROTATION_OFFSET);
     }
 
     /**
