@@ -35,4 +35,5 @@ If you're having trouble getting started, here are a few sites you can go to for
 
 - [Game Manual 0](https://gm0.org/): general information on FTC.  Most of it is for hardware, but it has some useful tutorials for getting started
 - [Tech Toolbox](https://ftc-tech-toolbox.vercel.app/): this has guides for almost everything you want to do in terms of software
+- [FTC Docs](https://ftc-docs.firstinspires.org/): The OFFICIAL FTC DOCUMENTATION
 - ...And as always, if you don't find an answer from anything above, a quick search online never hurts
