@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-public final class Arm {
+public final class Arm extends ModuleBase {
 
     public static final int ENCODER_RESOLUTION = ((((1+(46/17))) * (1+(46/17))) * (1+(46/17)) * 28);
 
@@ -20,19 +20,6 @@ public final class Arm {
      */
     public static final String ARM_MOTOR_DEFAULT_NAME = "Arm Motor";
 
-    /**
-     * Initializes the module with the given motor
-     * @param armMotor the motor moving the arm
-     */
-    public Arm(DcMotor armMotor) {
-        this.armMotor = armMotor;
-
-        // motor config
-        armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armMotor.setTargetPosition(0);
-        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
 
     /**
      * Given an OpMode, initializes the module with the default motor (one with the module's default motor name)
@@ -40,9 +27,19 @@ public final class Arm {
      * @exception InterruptedException The module was unable to locate the necessary motors
      */
     public Arm(@NonNull OpMode registrar) throws InterruptedException {
-        this(
-                registrar.hardwareMap.get(DcMotor.class, ARM_MOTOR_DEFAULT_NAME)
-        );
+        super(registrar);
+        try {
+            this.armMotor = registrar.hardwareMap.get(DcMotor.class, ARM_MOTOR_DEFAULT_NAME);
+        }
+        catch (IllegalArgumentException e) {
+            throw new InterruptedException(e.getMessage());
+        }
+
+        // motor config
+        armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setTargetPosition(0);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void setRotation(int rotation) {

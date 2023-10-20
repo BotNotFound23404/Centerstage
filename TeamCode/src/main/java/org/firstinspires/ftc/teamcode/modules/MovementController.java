@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-public final class MovementController {
+public final class MovementController extends ModuleBase {
     /**
      * The motor that drives the front right mecanum wheel
      */
@@ -53,19 +53,17 @@ public final class MovementController {
     public static final String BACK_LEFT_MECANUM_DRIVER_DEFAULT_NAME = "Back Left Mecanum Driver";
 
     /**
-     * Initializes the module with the given motors
-     * @param frontRight the motor connected to the front right mecanum wheel
-     * @param frontLeft the motor connected to the front left mecanum wheel
-     * @param backLeft the motor connected to the back right mecanum wheel
-     * @param backRight the motor connected to the back left mecanum wheel
-     * @exception InterruptedException The module was unable to access and/or configure the motors
+     * Attempts to initialize the module by getting motors with the default names from a hardware map
+     * @param registrar the OpMode that will be using the module
+     * @exception InterruptedException The module was unable to locate the necessary motors
      */
-    public MovementController(DcMotor frontRight, DcMotor frontLeft, DcMotor backLeft, DcMotor backRight) throws InterruptedException {
+    public MovementController(@NonNull OpMode registrar) throws InterruptedException {
+        super(registrar);
         try {
-            frontRightMecanumDriver = frontRight;
-            frontLeftMecanumDriver = frontLeft;
-            backLeftMecanumDriver = backRight;
-            backRightMecanumDriver = backLeft;
+            frontRightMecanumDriver = registrar.hardwareMap.get(DcMotor.class, FRONT_RIGHT_MECANUM_DRIVER_DEFAULT_NAME);
+            frontLeftMecanumDriver = registrar.hardwareMap.get(DcMotor.class, FRONT_LEFT_MECANUM_DRIVER_DEFAULT_NAME);
+            backLeftMecanumDriver = registrar.hardwareMap.get(DcMotor.class, BACK_RIGHT_MECANUM_DRIVER_DEFAULT_NAME);
+            backRightMecanumDriver = registrar.hardwareMap.get(DcMotor.class, BACK_LEFT_MECANUM_DRIVER_DEFAULT_NAME);
         }
         catch (IllegalArgumentException e) {
             throw new InterruptedException(e.getMessage());
@@ -76,20 +74,6 @@ public final class MovementController {
         backRightMecanumDriver.setDirection(DcMotorSimple.Direction.FORWARD);
         frontLeftMecanumDriver.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMecanumDriver.setDirection(DcMotorSimple.Direction.REVERSE);
-    }
-
-    /**
-     * Attempts to initialize the module by getting motors with the default names from a hardware map
-     * @param registrar the OpMode that will be using the module
-     * @exception InterruptedException The module was unable to locate the necessary motors
-     */
-    public MovementController(@NonNull OpMode registrar) throws InterruptedException {
-        this(
-            registrar.hardwareMap.get(DcMotor.class, FRONT_RIGHT_MECANUM_DRIVER_DEFAULT_NAME),
-            registrar.hardwareMap.get(DcMotor.class, FRONT_LEFT_MECANUM_DRIVER_DEFAULT_NAME),
-            registrar.hardwareMap.get(DcMotor.class, BACK_RIGHT_MECANUM_DRIVER_DEFAULT_NAME),
-            registrar.hardwareMap.get(DcMotor.class, BACK_LEFT_MECANUM_DRIVER_DEFAULT_NAME)
-        );
     }
 
     /**
