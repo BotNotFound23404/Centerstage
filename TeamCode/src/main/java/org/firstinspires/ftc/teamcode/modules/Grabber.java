@@ -46,7 +46,6 @@ public final class Grabber {
      * Initializes the module with the given motors
      * @param servo1 The first servo controlling the grabber
      * @param servo2 The second servo controlling the grabber
-     * @param arm The arm module attached to the grabber
      */
     public Grabber(Servo servo1, Servo servo2) {
         this.servo1 = servo1;
@@ -59,9 +58,8 @@ public final class Grabber {
     /**
      * Given an OpMode, initializes the module with the default motors (ones with the module's default motor name)
      * @param registrar The OpMode initializing the module
-     * @exception InterruptedException The module was unable to locate the necessary motors
      */
-    public Grabber(@NonNull OpMode registrar) throws InterruptedException {
+    public Grabber(@NonNull OpMode registrar) {
         this(
                 registrar.hardwareMap.get(Servo.class, SERVO1_DEFAULT_NAME),
                 registrar.hardwareMap.get(Servo.class, SERVO2_DEFAULT_NAME)
