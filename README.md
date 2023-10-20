@@ -2,7 +2,7 @@
 
 This project contains the code used by the BotNotFound team for the 2023-2024 CENTERSTAGE competition
 
-**IMPORTANT: All code for the robot is in the [`TeamCode` project](./TeamCode)!  The `FtcRobotController` project is just templates and code there WILL NOT be built or uploaded to the Control Hub!**
+**IMPORTANT: All code for the robot is in the [`TeamCode`](./TeamCode)f project!  The `FtcRobotController` project is just templates and code there WILL NOT be built or uploaded to the Control Hub!**
 
 ## Requirements
 
@@ -16,16 +16,12 @@ To use the project, you need:
 You can find command-line tools for Android development [here](https://developer.android.com/studio).  The download links are at the very bottom of the page.
 After unzipping the tools, open a terminal in the `bin/` folder and enter the following command:
 
-<code>
-sdkmanager --install platforms;android-34 --sdk_root="the path to an empty folder that will contain your Android SDK"
-</code>
+`sdkmanager --install platforms;android-34 --sdk_root="the path to an empty folder that will contain your Android SDK"`
 
 This should install the Android SDK to folder that you want.
 After that is done, make a new file at the root of the repostiory called `local.properties` with the following contents:
 
-<code>
-sdk.dir="Absolute path of the folder containing the Android SDK"
-</code>
+`sdk.dir="Absolute path of the folder containing the Android SDK"`
 
 With that set up, just open a terminal in the root of the repository and enter the command `.\gradlew build` to build the project, or `./gradlew installRelease` while connected to the Control Hub to install the build there.
 
