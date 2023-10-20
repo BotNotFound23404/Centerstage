@@ -83,7 +83,7 @@ public final class MovementController extends ModuleBase {
      * @param rotation The rotation
      */
     public void moveAndRotateRobot(double distX, double distY, double rotation) {
-        telemetry.addData("Moving by vector:", "<%d, %d, %d>", distX, distY, rotation);
+        telemetry.addData("Moving by vector:", "<%f, %f, %f>", distX, distY, rotation);
         telemetry.update();
 
         // Combine the requests for each axis-motion to determine each wheel's power.
