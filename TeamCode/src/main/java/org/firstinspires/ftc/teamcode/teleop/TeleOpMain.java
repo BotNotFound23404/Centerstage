@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.OpBase;
@@ -41,14 +40,14 @@ public class TeleOpMain extends OpBase {
 
             // 1st gamepad controls movement
             mover.moveAndRotateRobot(
-                    gamepad1.left_stick_x,
-                    -gamepad1.left_stick_y,
+                    gamepad1.left_stick_y,
+                    -gamepad1.left_stick_x,
                     gamepad1.right_stick_x
             );
 
             // 2nd gamepad controls grabbing
             grabber.rotate(gamepad2.left_stick_y * 0.005);
-            arm.rotate((int)(gamepad2.right_stick_y * Arm.ENCODER_RESOLUTION));
+            arm.setRotation((int)(gamepad2.right_stick_y * Arm.ENCODER_RESOLUTION) + arm.getRotation());
             if (currentGamepad2.a && !previousGamepad2.a) {
                 grabber.toggleGrabState();
             }
