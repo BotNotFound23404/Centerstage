@@ -43,10 +43,16 @@ public final class Arm extends ModuleBase {
     }
 
     public void setRotation(int rotation) {
+        telemetry.addData("Rotating arm to:", rotation);
+        telemetry.update();
+
         armMotor.setTargetPosition(rotation);
     }
 
     public void rotate(int rotation) {
+        telemetry.addData("Rotating arm by:", rotation);
+        telemetry.update();
+
         armMotor.setPower(rotation);
     }
 
