@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.lynx.LynxModule;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.modules.Arm;
 import org.firstinspires.ftc.teamcode.modules.Grabber;
@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.modules.MovementController;
 
 import java.util.List;
 
-public abstract class OpBase extends LinearOpMode {
+public abstract class OpBase extends OpMode {
 
     // Globally Declared Sensors
 
@@ -20,6 +20,7 @@ public abstract class OpBase extends LinearOpMode {
     protected Grabber grabber;
 
     // Global Variables
+    protected Gamepad currentGamepad1, currentGamepad2, previousGamepad1, previousGamepad2;
 
     /**
      * Initializes global hardware and module classes
@@ -45,10 +46,14 @@ public abstract class OpBase extends LinearOpMode {
         telemetry.update();
     }
 
-    //Utility Functions
-
-    // Allows you to connect opModes to the base class
-    @Override public abstract void runOpMode() throws InterruptedException;
-
-    // handle hardware setup under the hood
+    @Override
+    public void init() {
+        try {
+            initHardware();
+        }
+        catch (InterruptedException e) {
+            telemetry.addData("INIT FAILED WITH MESSAGE", e.getMessage());
+            requestOpModeStop();
+        }
+    }
 } 
