@@ -81,7 +81,6 @@ public final class Grabber extends ModuleBase {
         isGrabbing = true;
 
         telemetry.addLine("Grabbing grabber");
-        telemetry.update();
 
         // rotating servos in different directions to rotate the middle gear
         servo1.setPosition(servo1.getPosition() + ACTIVE_SERVO_ROTATION_OFFSET);
@@ -96,7 +95,6 @@ public final class Grabber extends ModuleBase {
         isGrabbing = false;
 
         telemetry.addLine("Releasing grabber");
-        telemetry.update();
 
         // rotating servos in different directions to rotate the middle gear
         servo1.setPosition(servo1.getPosition()  - ACTIVE_SERVO_ROTATION_OFFSET);

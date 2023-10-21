@@ -51,6 +51,8 @@ public class TeleOpMain extends OpBase {
             if (currentGamepad2.a && !previousGamepad2.a) {
                 grabber.toggleGrabState();
             }
+
+            telemetry.update(); // so we can push all telemetry at once
         }
     }
     
