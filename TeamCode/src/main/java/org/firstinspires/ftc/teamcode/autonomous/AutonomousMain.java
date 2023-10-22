@@ -7,7 +7,12 @@ import org.firstinspires.ftc.teamcode.OpBase;
 public class AutonomousMain extends OpBase {
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void start() {
+
+    }
+
+    @Override
+    public void loop() {
 
     }
     
