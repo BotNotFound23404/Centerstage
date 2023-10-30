@@ -1,6 +1,6 @@
 # FTC Robot 2023
 
-This project contains the code used by the BotNotFound team for the 2023-2024 CENTERSTAGE competition
+This project contains the code used by FTC team 23404, Bot Not Found, for the 2023-2024 CENTERSTAGE competition
 
 **IMPORTANT: All code for the robot is in the [`TeamCode`](./TeamCode) project!  The `FtcRobotController` project is just templates and code there WILL NOT be built or uploaded to the Control Hub!**
 
