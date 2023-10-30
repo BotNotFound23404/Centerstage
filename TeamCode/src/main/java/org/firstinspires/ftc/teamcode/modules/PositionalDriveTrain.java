@@ -25,11 +25,11 @@ public final class PositionalDriveTrain extends DriveTrain {
                 // (same w/ x & y, distance is measured in nanoseconds) if deltaTime > remaining
                 //  distance, set motors to fractional power; otherwise, just set to full power
                 if (remainingDistance.rotation < deltaTime) {
-                    super.moveAndRotateRobot(0, 0, Math.copySign(absRemainingRotation / deltaTime, remainingDistance.rotation));
+                    setVelocity(0, 0, Math.copySign(absRemainingRotation / deltaTime, remainingDistance.rotation));
                     remainingDistance.rotation = 0;
                 }
                 else {
-                    super.moveAndRotateRobot(0, 0, Math.copySign(1, remainingDistance.rotation));
+                    setVelocity(0, 0, Math.copySign(1, remainingDistance.rotation));
                     remainingDistance.rotation -= Math.copySign(deltaTime, remainingDistance.rotation);
                 }
             }
@@ -38,13 +38,13 @@ public final class PositionalDriveTrain extends DriveTrain {
                 double absRemainingDistY = Math.abs(remainingDistance.y);
                 double powerX = Math.copySign(absRemainingDistX < deltaTime ? absRemainingDistX / deltaTime : 1, remainingDistance.x);
                 double powerY = Math.copySign(absRemainingDistY < deltaTime ? absRemainingDistY / deltaTime : 1, remainingDistance.y);
-                super.moveAndRotateRobot(powerX, powerY, 0);
+                setVelocity(powerX, powerY, 0);
                 remainingDistance.subtract(new Point(Math.copySign(Math.max(absRemainingDistX, deltaTime), remainingDistance.x),
                         Math.copySign(Math.max(absRemainingDistY, deltaTime), remainingDistance.y),
                         0));
             }
             else {
-                super.moveAndRotateRobot(0, 0, 0);
+                setVelocity(0, 0, 0);
             }
         }
     });
@@ -62,7 +62,7 @@ public final class PositionalDriveTrain extends DriveTrain {
 
 
 
-    @Override
+    
     public void moveAndRotateRobot(double distX, double distY, double rotation) {
         remainingDistance = remainingDistance.add(new Point(distX, distY, rotation));
     }

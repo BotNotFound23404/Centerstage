@@ -85,9 +85,9 @@ public class DriveTrain extends ModuleBase {
      * Moves and rotates the robot
      * @param distX The right velocity
      * @param distY The forward velocity
-     * @param rotation The rotation
+     * @param rotation The rotational velocity
      */
-    public void moveAndRotateRobot(double distX, double distY, double rotation) {
+    public void setVelocity(double distX, double distY, double rotation) {
         getTelemetry().addData("Moving by vector:", "<%f, %f, %f>", distX, distY, rotation);
 
         // Combine the requests for each axis-motion to determine each wheel's power.
